@@ -1,6 +1,7 @@
 package com.suirtech.automation.testservice;
 
 import com.github.javafaker.Faker;
+import com.suirtech.automation.testservice.model.Address;
 import com.suirtech.automation.testservice.model.User;
 import com.suirtech.automation.testservice.repositories.UserRepository;
 import org.slf4j.Logger;
@@ -26,16 +27,23 @@ public class TestServiceApplication {
     @Bean
     public CommandLineRunner setup(UserRepository repository) {
         return (String... args) -> {
-            repository.save(new User("testUser1", "password", "Sean", "Conery"));
-            repository.save(new User("testUser2", "password", "Sean", "O Brien"));
-            repository.save(new User("testUser3", "password", "Conor", "Murray"));
-            repository.save(new User("testUser4", "password", "Steve", "Jobs"));
-            repository.save(new User("testUser5", "password1", "Bad", "User"));
+            repository.save(new User("testUser1", "password", "Sean", "Conery", new Address()));
+            repository.save(new User("testUser2", "password", "Sean", "O Brien", new Address()));
+            repository.save(new User("testUser3", "password", "Conor", "Murray", new Address()));
+            repository.save(new User("testUser4", "password", "Steve", "Jobs", new Address()));
+            repository.save(new User("testUser5", "password1", "Bad", "User", new Address()));
 
             Faker faker = new Faker();
 
-            for(int i = 0; i < 1000; i++){
-                repository.save(new User(faker.name().username(), faker.internet().password(), faker.name().firstName(), faker.name().lastName()));
+            for (int i = 0; i < 1000; i++) {
+                repository.save(new User(faker.name().username(), faker.internet().password(),
+                        faker.name().firstName(), faker.name().lastName(),
+                        new Address(
+                                faker.address().buildingNumber(),
+                                faker.address().streetAddress(),
+                                faker.address().city(),
+                                faker.address().country())
+                ));
 
             }
 

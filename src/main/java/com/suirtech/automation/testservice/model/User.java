@@ -21,11 +21,15 @@ public class User  {
     @Column(name = "password")
     private String password;
 
-    public User(String userName, String password, String firstName, String lastName) {
+    @OneToOne(cascade = CascadeType.ALL)
+    private Address address;
+
+    public User(String userName, String password, String firstName, String lastName, Address address) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.userName = userName;
         this.password = password;
+        this.address = address;
     }
 
 }
