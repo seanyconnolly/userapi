@@ -4,8 +4,8 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.suirtech.automation</groupId>
-    <artifactId>test-service</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <artifactId>userapp</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>test-service</name>
