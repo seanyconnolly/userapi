@@ -1,5 +1,6 @@
 package com.suirtech.automation.testservice;
 
+import com.github.javafaker.Faker;
 import com.suirtech.automation.testservice.model.User;
 import com.suirtech.automation.testservice.repositories.UserRepository;
 import org.slf4j.Logger;
@@ -31,11 +32,18 @@ public class TestServiceApplication {
             repository.save(new User("testUser4", "password", "Steve", "Jobs"));
             repository.save(new User("testUser5", "password1", "Bad", "User"));
 
-            log.info("Customers found with findAll():");
-            log.info("-------------------------------");
-            for (User user : repository.findAll()) {
-                log.info(user.toString());
+            Faker faker = new Faker();
+
+            for(int i = 0; i < 1000; i++){
+                repository.save(new User(faker.name().username(), faker.internet().password(), faker.name().firstName(), faker.name().lastName()));
+
             }
+
+//            log.info("Customers found with findAll():");
+//            log.info("-------------------------------");
+//            for (User user : repository.findAll()) {
+//                log.info(user.toString());
+//            }
             log.info("");
             User u = repository.findByUserName("testUser4");
 
